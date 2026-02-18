@@ -35,6 +35,9 @@ StudentHealthAssessment360 helps universities proactively manage student health 
 - **Subjective:** Sleep Quality, Mood, Stress Levels  
 - **Target:** Health_Risk_Level  
 
+### Exploratory Data Analysis
+![EDA Results](data/processed/EDA_results.png)
+
 ---
 
 ## Repository Structure
