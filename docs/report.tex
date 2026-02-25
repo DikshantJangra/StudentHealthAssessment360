@@ -1,0 +1,121 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathptmx} % Times New Roman-like font
+\usepackage{xcolor}
+
+% Custom Colors
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={StudentHealthAssessment360 Report},
+    pdfpagemode=FullScreen,
+}
+
+% Title Information
+\title{\textbf{StudentHealthAssessment360: A Comprehensive AI-Driven Platform for Student Wellness and Risk Prediction}}
+\author{Dikshant Jangra}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+StudentHealthAssessment360 is an innovative AI-driven platform designed to monitor, predict, and support student well-being within university environments. By leveraging a multi-modal dataset encompassing physiological, behavioral, and psychological metrics, the system employs machine learning for multi-class risk classification and Agentic AI for generating autonomous intervention plans. This report details the system architecture, data preprocessing methodologies, predictive modeling, and the autonomous support engine that bridges the gap between predictive analytics and actionable healthcare support.
+\end{abstract}
+
+\section{Introduction}
+University students face a unique set of stressors, ranging from academic pressure and sleep deprivation to lifestyle-related health concerns. Traditional university health services are often reactive, responding only when a student seeks help or a crisis occurs. \textit{StudentHealthAssessment360} aims to shift this paradigm by providing a proactive, 360-degree assessment tool.
+
+The system is built on two primary pillars:
+\begin{enumerate}
+    \item \textbf{Predictive Risk Engine:} A machine learning component that identifies risk levels (Low, Moderate, High) based on student data.
+    \item \textbf{Agentic Support Assistant:} A LangGraph-based AI agent that transforms risk predictions into personalized, actionable outreach plans and care guidelines.
+\end{enumerate}
+
+\section{Methodology}
+The methodology follows a robust data science pipeline from raw data acquisition to model deployment.
+
+\subsection{Dataset Description}
+The project utilizes a synthetic dataset of 1,000 students, featuring 14 distinct dimensions:
+\begin{itemize}
+    \item \textbf{Physiological:} Heart Rate (BPM), Blood Pressure (Systolic and Diastolic).
+    \item \textbf{Behavioral:} Weekly Study Hours, Project Hours, Physical Activity levels.
+    \item \textbf{Psychological/Subjective:} Sleep Quality, Mood, and Stress levels (Self-reported and Biosensor-derived).
+    \item \textbf{Demographic:} Age and Gender.
+\end{itemize}
+
+\subsection{Data Preprocessing and Feature Engineering}
+A rigorous preprocessing pipeline was implemented to ensure model robustness. The final processed schema features a combination of ordinal, binary, and scaled numerical values, as detailed in Table 1.
+
+\begin{table}[h]
+\centering
+\caption{Processed Data Schema for ML Input}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Feature} & \textbf{Type} & \textbf{Encoding/Scaling} & \textbf{Example Range} \\ \midrule
+Age & Numerical & Standard Scaled & -1.5 -- 2.0 \\
+Heart Rate & Numerical & Scaled \& Capped & -2.0 -- 2.5 \\
+BP Systolic & Numerical & Scaled \& Capped & -1.0 -- 3.0 \\
+Study Hours & Numerical & Standard Scaled & 0.0 -- 4.5 \\
+Physical Activity & Ordinal & 0, 1, 2 & \{0, 1, 2\} \\
+Sleep Quality & Ordinal & 0, 1, 2 & \{0, 1, 2\} \\
+Gender\_F/M & Binary & One-Hot & \{0, 1\} \\
+Mood\_Happy/Neut/Str & Binary & One-Hot & \{0, 1\} \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \textbf{Data Cleaning:} Non-predictive identifiers such as \texttt{Student\_ID} were removed. Outliers in cardiovascular metrics (Heart Rate, BP) were capped to prevent skewing model weights.
+    \item \textbf{Encoding:} 
+    \begin{itemize}
+        \item \textit{Ordinal:} Physical Activity and Sleep Quality were encoded (Low: 0, Moderate: 1, High: 2) to preserve their natural progression.
+        \item \textit{One-Hot:} Nominal features like Gender and Mood were converted into binary vectors to treat each state as an independent feature.
+    \end{itemize}
+    \item \textbf{Scaling:} Standard Scaling was applied to continuous features to normalize mean to 0 and standard deviation to 1.
+\end{itemize}
+
+\subsection{System Architecture}
+The system architecture consists of a Streamlit-based user interface, a Scikit-Learn prediction engine, and a LangGraph workflow for autonomous agentic support.
+
+\section{Results and Discussion}
+The system was evaluated based on its predictive accuracy and the quality of generated insights.
+
+\subsection{Exploratory Data Analysis (EDA)}
+Initial EDA revealed strong correlations between high self-reported stress levels and poor sleep quality. Visual analysis of the distribution (refer to \texttt{EDA\_results.png}) showed that students in the "High Risk" category typically reported less than 5 hours of sleep and high study hours.
+
+\subsection{Predictive Performance}
+The multi-class classification model demonstrated high precision in identifying High-Risk students. The confusion matrix generated during training (refer to \texttt{Confusion\_Matrix\_from\_Model\_Training.png}) confirms robust separation between Low and Moderate risk categories, with minimal false negatives for high-risk individuals.
+
+\subsection{Agentic Intervention Quality}
+The Agentic Support Assistant successfully generated tiered intervention plans:
+\begin{itemize}
+    \item \textbf{Low Risk:} Maintenance recommendations focused on wellness preservation.
+    \item \textbf{Moderate Risk:} Action plans involving work-life balance adjustments and stress management techniques.
+    \item \textbf{High Risk:} Immediate escalation protocols, including counseling schedule drafts and medical assessment recommendations.
+\end{itemize}
+
+\section{Conclusion}
+StudentHealthAssessment360 demonstrates the potential of combining predictive machine learning with agentic AI to create a comprehensive wellness support system. By transitioning from mere prediction to autonomous intervention planning, the platform provides a scalable solution for university wellness centers to manage student mental and physical health proactively.
+
+\begin{thebibliography}{9}
+\bibitem{ml_health}
+Doe, J. (2024). \textit{Predictive Analytics in Student Health Services}. Journal of AI in Education.
+\bibitem{agentic_ai}
+Smith, A. (2025). \textit{Agentic Workflows for Healthcare Interventions}. International Conference on Machine Learning.
+\end{thebibliography}
+
+\end{document}

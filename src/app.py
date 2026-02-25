@@ -82,14 +82,14 @@ with col1:
     age = st.number_input("Age", 17, 30, 20)
     heart_rate = st.number_input("Heart Rate (BPM)", 40.0, 150.0, 72.0)
     bp_systolic = st.number_input("Systolic BP", 80.0, 180.0, 120.0)
-    bp_diastolic = st.number_input("Diastolic BP", 50.0, 120.0, 80.0)
-    stress_bio = st.slider("Biosensor Stress", 1.0, 10.0, 5.0, help="Stress level measured by wearable biosensors (1=Low, 10=Extreme)")
+    bp_diastolic = st.number_input("Diastolic BP", 50.0, 120.0, 80.0, help="Lower blood pressure reading during heart relaxation (normal: 60-80 mmHg)")
+    stress_bio = st.slider("Biosensor Stress", 1.0, 10.0, 5.0, help="Objective stress from wearable sensors (1=Low, 10=Extreme)")
 
 with col2:
     st.markdown('<p class="section-title"><i class="fas fa-book"></i> Academic</p>', unsafe_allow_html=True)
     study_hours = st.number_input("Study Hours/Week", 0.0, 100.0, 30.0)
     project_hours = st.number_input("Project Hours/Week", 0.0, 100.0, 15.0)
-    stress_self = st.slider("Self-Reported Stress", 1.0, 10.0, 5.0, help="Student's self-assessed stress level (1=Low, 10=Extreme)")
+    stress_self = st.slider("Self-Reported Stress", 1.0, 10.0, 5.0, help="Subjective stress level reported by student (1=Relaxed, 10=Overwhelmed)")
     activity = st.selectbox("Physical Activity", ["Low", "Moderate", "High"])
 
 with col3:
